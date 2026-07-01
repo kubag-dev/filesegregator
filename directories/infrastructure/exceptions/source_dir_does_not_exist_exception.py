@@ -1,0 +1,2 @@
+class SourceDirDoesNotExistException(Exception):
+    pass
