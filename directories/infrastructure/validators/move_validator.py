@@ -13,4 +13,3 @@ class MoveValidator:
     def validate(self) -> None:
         if not self.source.exists():
             raise SourceDirDoesNotExistException()
-        

@@ -1,7 +1,7 @@
 import pathlib
 
 
-class Main():
+class Main:
     pass
 
 
