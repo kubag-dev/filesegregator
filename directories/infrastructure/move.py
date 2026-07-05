@@ -52,7 +52,7 @@ class Move:
         others = self.source / "others"
         others.mkdir(parents=True, exist_ok=True)
 
-        for file in original_source.glob():
+        for file in original_source.glob("*"):
             # TODO: encapsulate possible types into a single property or smth
             # TODO: create submethods for each file type or smth
             if file.suffix in {
