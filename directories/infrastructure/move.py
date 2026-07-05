@@ -18,7 +18,7 @@ class Move:
     def execute(self):
         MoveValidator(source=self.source).validate()
         # TODO: move directory creation to other file
-        original_source = self.source.copy()
+        original_source = self.source
         self.source = self.source / "segregated"
         self.source.mkdir(parents=True, exist_ok=True)
 
