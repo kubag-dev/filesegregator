@@ -36,6 +36,11 @@ class SupportedFileTypes(StrEnum):
     # Executables
     EXE = ".exe"
 
+    # Audio
+    MP3 = ".mp3"
+    FLAC = ".flac"
+    WAV = ".wav"
+
     # TODO: consider how to do directories
 
     # TODO: consider property methods with each group

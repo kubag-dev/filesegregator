@@ -1,8 +1,10 @@
-import pathlib
+from pathlib import Path
+
+from directories.infrastructure.move import Move
 
 
 class Main:
-    pass
+    Move(source=Path("~/Desktop")).execute()
 
 
 if __name__ == "__main__":
