@@ -4,7 +4,7 @@ from directories.infrastructure.move import Move
 
 
 class Main:
-    Move(source=Path("~/Desktop")).execute()
+    Move(source=Path("~/Desktop").expanduser()).execute()
 
 
 if __name__ == "__main__":
