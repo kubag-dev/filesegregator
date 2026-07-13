@@ -3,6 +3,7 @@ from typing import TYPE_CHECKING
 
 from directories.infrastructure.collections import SupportedFileTypes
 from directories.infrastructure.validators import MoveValidator
+from directories.infrastructure.create_directories import CreateDirectories
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -17,42 +18,12 @@ class Move:
 
     def execute(self):
         MoveValidator(source=self.source).validate()
-        # TODO: move directory creation to other file
-        original_source = self.source
-        self.source = self.source / "segregated"
-        self.source.mkdir(parents=True, exist_ok=True)
+        # TODO: Depending on how the app grows consider using an orchestrator or include it at init
+        created_directories: dict[str, "Path"] = CreateDirectories(
+            source=self.source
+        ).execute()
 
-        images = self.source / "images"
-        images.mkdir(parents=True, exist_ok=True)
-
-        videos = self.source / "videos"
-        videos.mkdir(parents=True, exist_ok=True)
-
-        documents = self.source / "documents"
-        documents.mkdir(parents=True, exist_ok=True)
-
-        sheets = self.source / "sheets"
-        sheets.mkdir(parents=True, exist_ok=True)
-
-        web_files = self.source / "web_files"
-        web_files.mkdir(parents=True, exist_ok=True)
-
-        archives = self.source / "archives"
-        archives.mkdir(parents=True, exist_ok=True)
-
-        executables = self.source / "executables"
-        executables.mkdir(parents=True, exist_ok=True)
-
-        audio = self.source / "audio"
-        audio.mkdir(parents=True, exist_ok=True)
-
-        directories = self.source / "directories"
-        directories.mkdir(parents=True, exist_ok=True)
-
-        others = self.source / "others"
-        others.mkdir(parents=True, exist_ok=True)
-
-        for file in original_source.glob("*"):
+        for file in self.source.glob("*"):
             # TODO: encapsulate possible types into a single property or smth
             # TODO: create submethods for each file type or smth
             if file.suffix in {
@@ -61,14 +32,14 @@ class Move:
                 SupportedFileTypes.GIF.value,
                 SupportedFileTypes.WEBP.value,
             }:
-                new_dir = images / file.name
+                new_dir = created_directories["images"] / file.name
                 shutil.move(file, new_dir)
 
             elif file.suffix in {
                 SupportedFileTypes.MP4.value,
                 SupportedFileTypes.MOV.value,
             }:
-                new_dir = videos / file.name
+                new_dir = created_directories["videos"] / file.name
                 shutil.move(file, new_dir)
 
             elif file.suffix in {
@@ -77,7 +48,7 @@ class Move:
                 SupportedFileTypes.PDF.value,
                 SupportedFileTypes.DOCX.value,
             }:
-                new_dir = documents / file.name
+                new_dir = created_directories["documents"] / file.name
                 shutil.move(file, new_dir)
 
             elif file.suffix in {
@@ -86,11 +57,11 @@ class Move:
                 SupportedFileTypes.XML.value,
                 SupportedFileTypes.JSON.value,
             }:
-                new_dir = sheets / file.name
+                new_dir = created_directories["sheets"] / file.name
                 shutil.move(file, new_dir)
 
             elif file.suffix in set(SupportedFileTypes.HTML.value):
-                new_dir = web_files / file.name
+                new_dir = created_directories["web_files"] / file.name
                 shutil.move(file, new_dir)
 
             elif file.suffix in {
@@ -99,11 +70,11 @@ class Move:
                 SupportedFileTypes.RAR.value,
                 SupportedFileTypes.GZ.value,
             }:
-                new_dir = archives / file.name
+                new_dir = created_directories["archives"] / file.name
                 shutil.move(file, new_dir)
 
             elif file.suffix in set(SupportedFileTypes.EXE.value):
-                new_dir = executables / file.name
+                new_dir = created_directories["executables"] / file.name
                 shutil.move(file, new_dir)
 
             elif file.suffix in {
@@ -111,7 +82,7 @@ class Move:
                 SupportedFileTypes.FLAC.value,
                 SupportedFileTypes.WAV.value,
             }:
-                new_dir = audio / file.name
+                new_dir = created_directories["audio"] / file.name
                 shutil.move(file, new_dir)
 
             else:
