@@ -41,6 +41,37 @@ class SupportedFileTypes(StrEnum):
     FLAC = ".flac"
     WAV = ".wav"
 
-    # TODO: consider how to do directories
+    # Directories have been marked as a different type than file
+    # as such it's considered a special case not included here
 
-    # TODO: consider property methods with each group
+    @classmethod
+    def picture_types(cls) -> set[str]:
+        return {cls.JPG.value, cls.PNG.value, cls.WEBP.value, cls.GIF.value}
+
+    @classmethod
+    def video_types(cls) -> set[str]:
+        return {cls.MP4.value, cls.MOV.value}
+
+    @classmethod
+    def document_types(cls) -> set[str]:
+        return {cls.TXT.value, cls.ODT.value, cls.PDF.value, cls.DOCX.value}
+
+    @classmethod
+    def sheets_types(cls) -> set[str]:
+        return {cls.CSV.value, cls.XLSX.value, cls.XML.value, cls.JSON.value}
+
+    @classmethod
+    def web_types(cls) -> set[str]:
+        return set(cls.HTML.value)
+
+    @classmethod
+    def archive_types(cls) -> set[str]:
+        return {cls.ZIP.value, cls.SEVEN_Z.value, cls.RAR.value, cls.GZ.value}
+
+    @classmethod
+    def executable_types(cls) -> set[str]:
+        return set(cls.EXE.value)
+
+    @classmethod
+    def audio_types(cls) -> set[str]:
+        return {cls.MP3.value, cls.FLAC.value, cls.WAV.value}
