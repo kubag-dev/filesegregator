@@ -9,8 +9,7 @@ class CreateDirectories:
         self.source = source
 
     def execute(self) -> dict[str, "Path"]:
-        # TODO: consider using a typed dict instead of generic string and Path combo
-        path_map: dict[str, "Path"] = {}
+        path_map: dict[str, "Path" | dict] = {}
         self.source = self.source / "segregated"
         self.source.mkdir(parents=True, exist_ok=True)
         path_map["source"] = self.source

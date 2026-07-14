@@ -62,7 +62,7 @@ class SupportedFileTypes(StrEnum):
 
     @classmethod
     def web_types(cls) -> set[str]:
-        return set(cls.HTML.value)
+        return {cls.HTML.value}
 
     @classmethod
     def archive_types(cls) -> set[str]:
@@ -70,7 +70,7 @@ class SupportedFileTypes(StrEnum):
 
     @classmethod
     def executable_types(cls) -> set[str]:
-        return set(cls.EXE.value)
+        return {cls.EXE.value}
 
     @classmethod
     def audio_types(cls) -> set[str]:

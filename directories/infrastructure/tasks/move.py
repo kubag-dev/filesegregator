@@ -19,8 +19,6 @@ class Move:
     def execute(self):
         MoveValidator(source=self.source).validate()
         # TODO: Definitely pass a folder structure through method/init
-        # TODO: Move move.py and create_directories.py to common folder
-        # as they carry out given task
         created_directories: dict[str, "Path"] = CreateDirectories(
             source=self.source
         ).execute()
