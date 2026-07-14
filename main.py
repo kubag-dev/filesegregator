@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from directories.infrastructure.move import Move
+from directories.infrastructure.tasks.move import Move
 
 
 class Main:

@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING
 
 from directories.infrastructure.collections import SupportedFileTypes
 from directories.infrastructure.validators import MoveValidator
-from directories.infrastructure.create_directories import CreateDirectories
+from directories.infrastructure.tasks.create_directories import CreateDirectories
 
 if TYPE_CHECKING:
     from pathlib import Path
